@@ -1,0 +1,24 @@
+.searchBoxContainer {
+  display: flex;
+  align-items: center;
+
+  .searchBox {
+    &:before {
+      content: "";
+      box-sizing: border-box;
+      border-left: 1px solid gray;
+      margin-right: 20px;
+    }
+
+    input {
+      border: none;
+      outline: none;
+    }
+  }
+}
+
+.cultureForU::after {
+  content: "";
+  border-right: 1px solid gray;
+  margin-left: 15px;
+}

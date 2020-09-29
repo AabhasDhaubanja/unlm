@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "unlm",
+    "password": "#unlmOfficial33",
+    "database": "unlm",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "unlm",
+    "password": "#unlmOfficial33",
+    "database": "unlm",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "unlm",
+    "password": "#unlmOfficial33",
+    "database": "unlm",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
