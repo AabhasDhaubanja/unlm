@@ -7,6 +7,7 @@ import { INDEX_QUERY } from "../lib/queries";
 import MyCarousel from "../client/components/index/MyCarousel";
 import IndexFooter from "../client/components/index/IndexFooter";
 import Products from "../client/components/Products";
+import MyVideo from "../client/components/index/MyVideo";
 import MenWomenKids from "../client/components/index/MenWomenKids";
 
 const Home = () => {
@@ -31,6 +32,7 @@ const Home = () => {
           products={products}
         />
         <MenWomenKids />
+        <MyVideo />
         <IndexFooter />
       </main>
     </div>
