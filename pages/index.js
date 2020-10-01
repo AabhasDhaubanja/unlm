@@ -25,9 +25,9 @@ const Home = () => {
         <MyCarousel />
         <Products
           title={
-            <span>
+            <h2>
               <b>UNLM.</b> NEW ARRIVALS
-            </span>
+            </h2>
           }
           products={products}
         />

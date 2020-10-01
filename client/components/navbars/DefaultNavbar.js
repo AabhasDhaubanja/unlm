@@ -29,8 +29,8 @@ const DefaultNavbar = () => {
             </div>
           </Nav>
           <Nav>
-            <Link href="/">
-              <a className="nav-item nav-link">
+            <Link href="/culture">
+              <a href="/culture" className="nav-item nav-link">
                 <span className="cultureForU">CULTURE FOR YOU</span>
               </a>
             </Link>
