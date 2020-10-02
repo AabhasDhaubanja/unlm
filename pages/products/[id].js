@@ -1,58 +1,46 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { gql, useQuery } from "@apollo/client";
+import {} from "react-bootstrap";
+
+import { useQuery } from "@apollo/client";
 import { initializeApollo } from "../../lib/apolloClient";
 
-const Product = () => {
-  const router = useRouter();
-  const { id } = router.query;
+import { GET_PRODUCT } from "../../lib/queries";
 
-  const GET_PRODUCT = gql`
-query {
-  product(id: ${id}) {
-    id
-    name
-		price
-    Images {
-      url
-    }
-  }
-}`;
+const Product = ({ id }) => {
+  const {
+    data: { product },
+  } = useQuery(GET_PRODUCT, { variables: { id } });
 
-  const { data } = useQuery(GET_PRODUCT);
   return (
     <div>
-      <h1>{data}</h1>
+      <h1>{product.name}</h1>
     </div>
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { id: "1" } },
+      { params: { id: "2" } },
+      { params: { id: "3" } },
+      { params: { id: "4" } },
+    ],
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params: { id } }) {
   const apolloClient = initializeApollo();
-
-  const router = useRouter();
-
-  const { id } = router.query();
-
-  const GET_PRODUCT = gql`
-query {
-  product(id: ${id}) {
-    id
-    name
-		price
-    Images {
-      url
-    }
-  }
-}`;
 
   await apolloClient.query({
     query: GET_PRODUCT,
+    variables: { id },
   });
 
   return {
     props: {
       initialApolloState: apolloClient.cache.extract(),
+      id,
     },
   };
 }
