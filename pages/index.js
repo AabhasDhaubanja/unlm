@@ -11,9 +11,12 @@ import MyVideo from "../client/components/index/MyVideo";
 import MenWomenKids from "../client/components/index/MenWomenKids";
 
 const Home = () => {
-  const {
-    data: { arrivals },
-  } = useQuery(INDEX_QUERY);
+  const { loading, error, data } = useQuery(INDEX_QUERY);
+
+  if (loading) return "Loading ...";
+  if (error) return JSON.stringify(error);
+
+  const { arrivals } = data;
 
   const products = arrivals.map((arrival) => {
     return arrival.Product;
@@ -25,9 +28,9 @@ const Home = () => {
         <MyCarousel />
         <Products
           title={
-            <h2>
+            <h4>
               <b>UNLM.</b> NEW ARRIVALS
-            </h2>
+            </h4>
           }
           products={products}
         />
