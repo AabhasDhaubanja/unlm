@@ -15,35 +15,44 @@ module.exports = {
       "Categories",
       [
         {
+          name: "Root",
+          isRoot: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           name: "Men",
+          superId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Women",
+          superId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Kids",
+          superId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "T-Shirts",
-          superId: 1,
+          superId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Shoes",
-          superId: 1,
+          superId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Shorts",
-          superId: 1,
+          superId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

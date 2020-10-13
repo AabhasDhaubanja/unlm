@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
+import { useQuery } from "@apollo/client";
 
 const Search = () => {
-  console.log("here");
   const router = useRouter();
   const { text } = router.query;
-  console.log(text);
 
   return (
     <div>
       <div>Search</div>
-      <h1>Search</h1>
+      <h1>{text}</h1>
     </div>
   );
 };
