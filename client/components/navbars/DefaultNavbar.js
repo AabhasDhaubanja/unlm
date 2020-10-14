@@ -1,12 +1,23 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { Navbar, Nav, Form, FormControl } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 
 import { GoSearch } from "react-icons/go";
-// import { FaRegUserCircle } from "react-icons/fa";
-// import { AiOutlineHeart } from "react-icons/ai";
 
 const DefaultNavbar = () => {
+  const router = useRouter();
+
+  let [text, setText] = React.useState("nothing");
+
+  const textHandler = ({ target: { value } }) => {
+    setText(value);
+  };
+
+  const searchHandler = () => {
+    router.push("/search/[text]", `/search/${text}`);
+  };
+
   return (
     <React.Fragment>
       <div className="fixed-top bg-white">
@@ -21,9 +32,18 @@ const DefaultNavbar = () => {
             </Navbar.Brand>
             <div className="searchBoxContainer">
               <div className="searchBox">
-                <GoSearch />
+                <GoSearch onClick={searchHandler} />
                 <span className="pl-2">
-                  <input type="text" placeholder="search" />
+                  <input
+                    type="text"
+                    placeholder="search"
+                    onChange={textHandler}
+                    onKeyDown={({ key }) => {
+                      if (key == "Enter") {
+                        searchHandler();
+                      }
+                    }}
+                  />
                 </span>
               </div>
             </div>
@@ -31,7 +51,7 @@ const DefaultNavbar = () => {
           <Nav>
             <Link href="/culture">
               <a href="/culture" className="nav-item nav-link">
-                <span className="cultureForU">CULTURE FOR YOU</span>
+                <span className="cultureForU">CULTURE OF U</span>
               </a>
             </Link>
             <Link href="/signin">
