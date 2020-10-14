@@ -49,16 +49,16 @@ const DefaultNavbar = () => {
             </div>
           </Nav>
           <Nav>
-            <Link href="/culture">
-              <a href="/culture" className="nav-item nav-link">
-                <span className="cultureForU">CULTURE OF U</span>
-              </a>
+            <Link href="/discover/[id]" as="/discover/1">
+              <a className="nav-item nav-link">DISCOVER</a>
             </Link>
             <Link href="/signin">
               <a className="nav-item nav-link">LOGIN</a>
             </Link>
-            <Link href="/cart">
-              <a className="nav-item nav-link">CART</a>
+            <Link href="/culture">
+              <a href="/culture" className="nav-item nav-link">
+                <span className="cultureForU">CULTURE OF U</span>
+              </a>
             </Link>
           </Nav>
         </Navbar>

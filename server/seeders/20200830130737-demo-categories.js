@@ -15,7 +15,7 @@ module.exports = {
       "Categories",
       [
         {
-          name: "Root",
+          name: "Categories",
           isRoot: true,
           createdAt: new Date(),
           updatedAt: new Date(),

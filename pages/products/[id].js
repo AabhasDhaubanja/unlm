@@ -1,9 +1,7 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import { useRouter } from "next/router";
-
 import { useQuery } from "@apollo/client";
 import { initializeApollo } from "../../lib/apolloClient";
-
 import { GET_PRODUCT } from "../../lib/queries";
 
 const Product = () => {

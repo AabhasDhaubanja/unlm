@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   Category.init(
     {
       name: DataTypes.STRING,
+      isRoot: DataTypes.BOOLEAN,
       superId: DataTypes.INTEGER,
     },
     {

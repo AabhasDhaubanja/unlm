@@ -5,25 +5,11 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 const Products = ({ title, products }) => {
   return (
     <React.Fragment>
-      <Container>
-        <Row className="d-flex justify-content-center p-5 mt-5">{title}</Row>
-      </Container>
-      {/* <div className="productGridContainer">
-        {products.map((product) => (
-          <div className="productCard" key={product.name}>
-            <div>
-              <Image
-                style={{ height: "220px", width: "auto" }}
-                src={`${process.env.NEXT_PUBLIC_SERVER}${product.Images[0].url}`}
-              />
-              <div className="py-4">
-                <div style={{ fontWeight: 900 }}>{product.name}</div>
-                <div>Rs. {product.price} + Tax</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
+      {title ? (
+        <Container>
+          <Row className="d-flex justify-content-center p-5 mt-5">{title}</Row>
+        </Container>
+      ) : null}
       <Container fluid>
         <Row>
           {products.map((product) => (
@@ -48,7 +34,7 @@ const Products = ({ title, products }) => {
                     />
                   </div>
                   <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>{product.name}</Card.Title>
                     <Card.Text>
                       Some quick example text to build on the card title and
                       make up the bulk of the card's content.

@@ -17,8 +17,8 @@
   }
 }
 
-.cultureForU::after {
+.cultureForU::before {
   content: "";
-  border-right: 1px solid gray;
-  margin-left: 15px;
+  border-left: 1px solid gray;
+  margin-right: 15px;
 }
