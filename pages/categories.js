@@ -41,7 +41,7 @@ const Categories = () => {
             href="/discover/[id]"
             as={`/discover/${current.id}`}
           >
-            {current.name}
+            <a className="categoryLink">{current.name}</a>
           </Link>
         </div>
       );
@@ -59,7 +59,7 @@ const Categories = () => {
           href="/discover/[id]"
           as={`/discover/${current.id}`}
         >
-          <a>{current.name}</a>
+          <a className="categoryLink">{current.name}</a>
         </Link>
         <div>{organizedChildren.map((child) => child)}</div>
       </div>

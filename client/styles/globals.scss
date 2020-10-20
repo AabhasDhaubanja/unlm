@@ -22,6 +22,7 @@ html {
   overflow-x: hidden;
 }
 
+@import "./categories.scss";
 @import "./defaultNavbar.scss";
 @import "./products.scss";
 @import "./product.scss";
