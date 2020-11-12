@@ -6,7 +6,7 @@ const MyCarousel = () => {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={`${process.env.NEXT_PUBLIC_SERVER}/index/carousel_t3.png`}
+          src={`${process.env.NEXT_PUBLIC_SERVER}/index/carousel.jpg`}
           alt="Unlm Offcial Image"
         />
       </Carousel.Item>

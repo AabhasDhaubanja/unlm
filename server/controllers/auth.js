@@ -23,13 +23,13 @@ module.exports = {
         };
 
         const accessToken = jwt.sign(userObj, process.env.ACCESS_TOKEN_SECRET, {
-          expiresIn: "2h",
+          expiresIn: 60,
         });
         const refreshToken = jwt.sign(
           userObj,
           process.env.REFRESH_TOKEN_SECRET,
           {
-            expiresIn: "7d",
+            expiresIn: 120,
           }
         );
         const responseObj = {
@@ -41,6 +41,12 @@ module.exports = {
 
         return res.send(JSON.stringify(responseObj));
       })(req, res, next);
+    };
+  },
+
+  logout: () => {
+    return (req, res) => {
+      res.clearCookie("refresh").send("Logout Successful!");
     };
   },
 
@@ -66,9 +72,20 @@ module.exports = {
                 user,
                 process.env.ACCESS_TOKEN_SECRET,
                 {
-                  expiresIn: "2h",
+                  expiresIn: 60,
                 }
               );
+
+              const newRefreshToken = jwt.sign(
+                user,
+                process.env.REFRESH_TOKEN_SECRET,
+                {
+                  expiresIn: 120,
+                }
+              );
+
+              res.cookie("refresh", newRefreshToken, { httpOnly: true });
+
               return res.send({ user, accessToken });
             }
             return res.status(400).send(err);

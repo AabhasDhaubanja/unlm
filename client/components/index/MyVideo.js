@@ -1,6 +1,6 @@
 const MyVideo = () => {
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex justify-content-center py-5 my-5">
       <video
         id="unlmVideo"
         className="d-block"

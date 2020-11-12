@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { useSelector } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
-
 import { GoSearch } from "react-icons/go";
 
 const DefaultNavbar = () => {
+  const { authenticated } = useSelector((state) => state.users);
+
   const router = useRouter();
 
   let [text, setText] = React.useState("nothing");
@@ -49,12 +50,18 @@ const DefaultNavbar = () => {
             </div>
           </Nav>
           <Nav>
-            <Link href="/discover/[id]" as="/discover/1">
+            {/* <Link href="/discover/[id]" as="/discover/1">
               <a className="nav-item nav-link">DISCOVER</a>
-            </Link>
-            <Link href="/signin">
-              <a className="nav-item nav-link">LOGIN</a>
-            </Link>
+            </Link> */}
+            {authenticated ? (
+              <Link href="/profile">
+                <a className="nav-item nav-link">PROFILE</a>
+              </Link>
+            ) : (
+              <Link href="/signin">
+                <a className="nav-item nav-link">LOGIN</a>
+              </Link>
+            )}
             <Link href="/culture">
               <a href="/culture" className="nav-item nav-link">
                 <span className="cultureForU">CULTURE OF U</span>

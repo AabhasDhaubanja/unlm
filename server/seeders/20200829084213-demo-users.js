@@ -11,6 +11,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
+
+    // The passwords are the same as the emails.
     await queryInterface.bulkInsert(
       "Users",
       [

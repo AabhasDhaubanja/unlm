@@ -1,40 +1,44 @@
 import axios from "axios";
 import { Form, Button, Container } from "react-bootstrap";
+import err from "../client/helpers/err";
+import LoggedIn from "../client/redirects/loggedIn";
 
-class Signin extends React.Component {
-  state = {
+const Signin = () => {
+  const [state, setState] = React.useState({
     email: null,
     password: null,
-  };
+  });
 
-  loginHandler = () => {
+  const loginHandler = () => {
     axios
       .post(
         `${process.env.NEXT_PUBLIC_SERVER}/auth/login`,
-        { ...this.state },
+        { ...state },
         { withCredentials: true }
       )
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err.response));
+      .then((_) => {
+        window.location.reload();
+      })
+      .catch(err);
   };
 
-  emailHandler = (e) => {
-    this.setState({
-      ...this.state,
+  const emailHandler = (e) => {
+    setState({
+      ...state,
       email: e.target.value,
     });
   };
-  passwordHandler = (e) => {
-    this.setState({
-      ...this.state,
+
+  const passwordHandler = (e) => {
+    setState({
+      ...state,
       password: e.target.value,
     });
   };
 
-  render() {
-    return (
-      <React.Fragment>
-        {/* <Form.Group controlId="formBasicEmail"> */}
+  return (
+    <LoggedIn>
+      <div>
         <div
           style={{
             height: "50vh",
@@ -47,7 +51,7 @@ class Signin extends React.Component {
             <Form.Group>
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                onChange={this.emailHandler}
+                onChange={emailHandler}
                 type="email"
                 placeholder="Enter email"
               />
@@ -59,22 +63,19 @@ class Signin extends React.Component {
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                onChange={this.passwordHandler}
+                onChange={passwordHandler}
                 type="password"
                 placeholder="Password"
               />
             </Form.Group>
-            {/* <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group> */}
-            <Button onClick={this.loginHandler} variant="dark">
+            <Button onClick={loginHandler} variant="dark">
               SignIn
             </Button>
           </Container>
         </div>
-      </React.Fragment>
-    );
-  }
-}
+      </div>
+    </LoggedIn>
+  );
+};
 
 export default Signin;

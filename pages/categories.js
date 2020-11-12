@@ -33,6 +33,7 @@ const Categories = () => {
       textAlign: "center",
     };
 
+    // terminating condition
     if (children.length == 0)
       return (
         <div style={style} key={current.id}>

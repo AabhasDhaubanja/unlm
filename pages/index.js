@@ -34,7 +34,7 @@ const Home = () => {
           }
           products={products}
         />
-        <MenWomenKids />
+        {/* <MenWomenKids /> */}
         <MyVideo />
         <IndexFooter />
       </main>

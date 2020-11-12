@@ -51,8 +51,10 @@ router.use(passport.initialize());
 
 router.post("/login", authController.login(passport));
 
+router.post("/logout", authController.logout());
+
 router.post("/register", authController.register(passport));
 
-router.get("/check", authController.check());
+router.post("/check", authController.check());
 
 module.exports = router;

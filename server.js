@@ -55,9 +55,12 @@ app.prepare().then(() => {
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
-    context: (_) => ({
-      models,
-    }),
+    context: ({ req }) => {
+      console.log(req.headers);
+      return {
+        models,
+      };
+    },
   });
 
   apolloServer.applyMiddleware({ app: server });
