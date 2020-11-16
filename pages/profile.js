@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Button } from "react-bootstrap";
-import LoggedOut from "../client/redirects/loggedOut";
+import { checkAuth } from "../client/hocs/checkAuth";
+import { loggedOut } from "../client/hocs/redirect";
 
 const Profile = () => {
   const logoutHandler = () => {
@@ -17,16 +18,15 @@ const Profile = () => {
   };
 
   return (
-    <LoggedOut>
-      <div>
-        <h1>Profile</h1>
-
-        <Button variant="danger" onClick={logoutHandler}>
-          Logout
-        </Button>
-      </div>
-    </LoggedOut>
+    <div>
+      <h1>Profile</h1>
+      <Button variant="danger" onClick={logoutHandler}>
+        Logout
+      </Button>
+    </div>
   );
 };
 
-export default Profile;
+export const getServerSideProps = checkAuth();
+
+export default loggedOut(Profile, "/login");

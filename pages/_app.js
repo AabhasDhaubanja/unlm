@@ -2,13 +2,12 @@ import Head from "next/head";
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/apolloClient";
 import Default from "../client/layouts/Default";
-import CheckAuth from "../client/hocs/CheckAuth";
 import { Provider } from "react-redux";
-import { createWrapper } from "next-redux-wrapper";
-import store from "../redux/store";
+import { useStore } from "../redux/store";
 import "../client/styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
   const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
@@ -19,18 +18,14 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <Provider store={store}>
-        <CheckAuth>
-          <ApolloProvider client={apolloClient}>
-            <Default>
-              <Component {...pageProps} />
-            </Default>
-          </ApolloProvider>
-        </CheckAuth>
+        <ApolloProvider client={apolloClient}>
+          <Default>
+            <Component {...pageProps} />
+          </Default>
+        </ApolloProvider>
       </Provider>
     </div>
   );
 }
 
-const wrapper = createWrapper(() => store);
-
-export default wrapper.withRedux(MyApp);
+export default MyApp;

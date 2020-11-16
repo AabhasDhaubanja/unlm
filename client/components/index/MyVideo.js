@@ -10,7 +10,7 @@ const MyVideo = () => {
         muted
         controls
       >
-        <source src={`${process.env.NEXT_PUBLIC_SERVER}/index/unlm.mp4`} />
+        <source src={`${process.env.NEXT_PUBLIC_SERVER}/index_page/unlm.mp4`} />
       </video>
     </div>
   );

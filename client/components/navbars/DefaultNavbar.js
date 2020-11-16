@@ -58,7 +58,7 @@ const DefaultNavbar = () => {
                 <a className="nav-item nav-link">PROFILE</a>
               </Link>
             ) : (
-              <Link href="/signin">
+              <Link href="/login">
                 <a className="nav-item nav-link">LOGIN</a>
               </Link>
             )}

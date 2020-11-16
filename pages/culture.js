@@ -23,7 +23,7 @@ const Culture = () => {
             key={culture.url}
             className="cultureGridItem"
             style={{
-              background: `url("${process.env.NEXT_PUBLIC_SERVER}/culture/${culture.url}")`,
+              background: `url("${process.env.NEXT_PUBLIC_SERVER}/culture_page/${culture.url}")`,
               backgroundSize: "cover",
             }}
           ></div>

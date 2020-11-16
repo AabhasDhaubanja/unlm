@@ -4,7 +4,6 @@ const cacheableResponse = require("cacheable-response");
 const express = require("express");
 const next = require("next");
 const morgan = require("morgan");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { ApolloServer } = require("apollo-server-express");
 
@@ -56,7 +55,6 @@ app.prepare().then(() => {
     typeDefs,
     resolvers,
     context: ({ req }) => {
-      console.log(req.headers);
       return {
         models,
       };

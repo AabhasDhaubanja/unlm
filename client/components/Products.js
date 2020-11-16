@@ -30,7 +30,7 @@ const Products = ({ title, products }) => {
                         height: 220,
                         width: "auto",
                       }}
-                      src={`${process.env.NEXT_PUBLIC_SERVER}${product.Images[0].url}`}
+                      src={`${process.env.NEXT_PUBLIC_SERVER}/products_page/${product.Images[0].url}`}
                     />
                   </div>
                   <Card.Body>
