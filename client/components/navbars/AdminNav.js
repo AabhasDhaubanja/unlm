@@ -1,10 +1,44 @@
+import Link from "next/link";
+import { Navbar, Nav } from "react-bootstrap";
+
 const AdminNav = () => {
   return (
-    <nav>
-      <div>
-        <h1>Admin Nav Bitches</h1>
+    <React.Fragment>
+      <div className="fixed-top bg-white">
+        <Navbar
+          className="justify-content-between align-items-center"
+          expand="md"
+          bg="dark"
+          variant="dark"
+        >
+          <Navbar.Brand>
+            <Link href="/">
+              <div className="pointer">
+                <b>UNLM.</b>
+              </div>
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              <Link href="/admin/products">
+                <a href="/admin/products" className="nav-item nav-link">
+                  <span>PRODUCTS</span>
+                </a>
+              </Link>
+              <Link href="/profile">
+                <a href="/profile" className="nav-item nav-link">
+                  <span>PROFILE</span>
+                </a>
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
-    </nav>
+      <div style={{ height: 50, background: "red" }}>
+        You are not supposed to see this.
+      </div>
+    </React.Fragment>
   );
 };
 

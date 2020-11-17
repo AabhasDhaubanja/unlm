@@ -1,4 +1,5 @@
 import React from "react";
+import Loading from "../components/Loading";
 
 export const loggedIn = (Component, link) => {
   return ({ initialReduxState: { users } }) => {
@@ -9,11 +10,7 @@ export const loggedIn = (Component, link) => {
     }, []);
 
     if (users.authenticated) {
-      return (
-        <div>
-          <h1>loading...</h1>
-        </div>
-      );
+      return <Loading />;
     }
 
     return <Component />;
@@ -29,11 +26,31 @@ export const loggedOut = (Component, link) => {
     }, []);
 
     if (!users.authenticated) {
-      return (
-        <div>
-          <h1>loading...</h1>
-        </div>
-      );
+      return <Loading />;
+    }
+
+    return <Component />;
+  };
+};
+
+export const nonAdmin = (Component, link) => {
+  return ({ initialReduxState: { users } }) => {
+    React.useEffect(() => {
+      if (
+        !users.authenticated ||
+        !users.user.role ||
+        users.user.role !== "admin"
+      ) {
+        window.location.href = link;
+      }
+    }, []);
+
+    if (
+      !users.authenticated ||
+      !users.user.role ||
+      users.user.role !== "admin"
+    ) {
+      return <Loading />;
     }
 
     return <Component />;

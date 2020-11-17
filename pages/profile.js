@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Button } from "react-bootstrap";
+import { FaUserCircle } from "react-icons/fa";
 import { checkAuth } from "../client/hocs/checkAuth";
 import { loggedOut } from "../client/hocs/redirect";
 
@@ -18,11 +19,17 @@ const Profile = () => {
   };
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <Button variant="danger" onClick={logoutHandler}>
-        Logout
-      </Button>
+    <div className="d-flex justify-content-center py-5">
+      <div>
+        <div className="d-flex justify-content-center py-5 display-1">
+          <FaUserCircle />
+        </div>
+        <div className="d-flex justify-content-center">
+          <Button variant="danger" onClick={logoutHandler}>
+            Logout
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { checkAuth } from "../../client/hocs/checkAuth";
 import { GET_PRODUCT, GET_CATEGORY } from "../../lib/queries";
 import Products from "../../client/components/Products";
+import Loading from "../../client/components/Loading";
 
 const Product = () => {
   const router = useRouter();
@@ -77,7 +78,7 @@ const Product = () => {
           products={dataS.products}
         />
       ) : (
-        <div>loading...</div>
+        <Loading />
       )}
     </>
   );
