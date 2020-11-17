@@ -39,6 +39,7 @@ export const checkAuth = (QUERY) => {
 
       await apolloClient.query({
         query: QUERY,
+        variables: ctx.params,
       });
 
       return {

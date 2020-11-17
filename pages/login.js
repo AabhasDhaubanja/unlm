@@ -1,3 +1,4 @@
+import Link from "next/link";
 import axios from "axios";
 import { Form, Button, Container } from "react-bootstrap";
 import { checkAuth } from "../client/hocs/checkAuth";
@@ -71,6 +72,15 @@ const Login = () => {
           <Button onClick={loginHandler} variant="dark">
             SignIn
           </Button>
+          <div className="pointer py-5">
+            <span>Don't have an account?</span>
+            <Link href="/comming">
+              <u>
+                {" "}
+                <b>Sign up</b> here
+              </u>
+            </Link>
+          </div>
         </Container>
       </div>
     </div>
