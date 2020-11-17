@@ -1,8 +1,9 @@
 import axios from "axios";
 import { initializeStore } from "../../redux/store";
 import { AUTHENTICATE } from "../../redux/actionTypes";
+import { initializeApollo } from "../../lib/apolloClient";
 
-export const checkAuth = () => {
+export const checkAuth = (QUERY) => {
   return async (ctx) => {
     const reduxStore = initializeStore();
     const { dispatch } = reduxStore;
@@ -33,7 +34,21 @@ export const checkAuth = () => {
       console.log(Object.keys(error), error.message);
     }
 
-    console.log("here");
+    if (QUERY) {
+      const apolloClient = initializeApollo();
+
+      await apolloClient.query({
+        query: QUERY,
+      });
+
+      return {
+        props: {
+          initialReduxState: reduxStore.getState(),
+          initialApolloState: apolloClient.cache.extract(),
+        },
+      };
+    }
+
     return {
       props: {
         initialReduxState: reduxStore.getState(),

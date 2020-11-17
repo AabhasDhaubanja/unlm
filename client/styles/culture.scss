@@ -1,10 +1,30 @@
 .cultureGridContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: minmax(400px, 1fr);
+  grid-auto-rows: minmax(500px, 1fr);
   grid-gap: 20px;
 }
 
-#cultureGridText {
-  grid-row: 1/3;
+// xs: 0,
+// sm: 576px,
+// md: 768px,
+// lg: 992px,
+// xl: 1200px
+
+@media screen and (min-width: 992px) {
+  #cultureGridText {
+    grid-row: 1/3;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .cultureGridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .cultureGridContainer {
+    grid-template-columns: 1fr;
+  }
 }

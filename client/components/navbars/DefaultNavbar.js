@@ -22,15 +22,18 @@ const DefaultNavbar = () => {
   return (
     <React.Fragment>
       <div className="fixed-top bg-white">
-        <Navbar className="justify-content-between align-items-center">
-          <Nav>
-            <Navbar.Brand>
+        <Navbar
+          className="justify-content-between align-items-center"
+          expand="md"
+        >
+          <div className="d-flex">
+            <div className="customNavBrand">
               <Link href="/">
-                <a className="navbar-brand">
+                <div className="pointer">
                   <b>UNLM.</b>
-                </a>
+                </div>
               </Link>
-            </Navbar.Brand>
+            </div>
             <div className="searchBoxContainer">
               <div className="searchBox">
                 <GoSearch onClick={searchHandler} />
@@ -48,29 +51,32 @@ const DefaultNavbar = () => {
                 </span>
               </div>
             </div>
-          </Nav>
-          <Nav>
-            {/* <Link href="/discover/[id]" as="/discover/1">
+          </div>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto">
+              {/* <Link href="/discover/[id]" as="/discover/1">
               <a className="nav-item nav-link">DISCOVER</a>
             </Link> */}
-            {authenticated ? (
-              <Link href="/profile">
-                <a className="nav-item nav-link">PROFILE</a>
+              {authenticated ? (
+                <Link href="/profile">
+                  <a className="nav-item nav-link">PROFILE</a>
+                </Link>
+              ) : (
+                <Link href="/login">
+                  <a className="nav-item nav-link">LOGIN</a>
+                </Link>
+              )}
+              <Link href="/culture">
+                <a href="/culture" className="nav-item nav-link">
+                  <span className="cultureForU">CULTURE OF U</span>
+                </a>
               </Link>
-            ) : (
-              <Link href="/login">
-                <a className="nav-item nav-link">LOGIN</a>
-              </Link>
-            )}
-            <Link href="/culture">
-              <a href="/culture" className="nav-item nav-link">
-                <span className="cultureForU">CULTURE OF U</span>
-              </a>
-            </Link>
-          </Nav>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
       </div>
-      <div style={{ height: 60, background: "red" }}>
+      <div style={{ height: 50, background: "red" }}>
         You are not supposed to see this.
       </div>
     </React.Fragment>

@@ -15,8 +15,11 @@ const Products = ({ title, products }) => {
           {products.map((product) => (
             <Col
               key={product.id}
-              xs={3}
-              className="d-flex justify-content-center"
+              lg={3}
+              md={4}
+              sm={6}
+              xs={12}
+              className="d-flex justify-content-center pb-5"
             >
               <Link
                 href="/products/[id]"

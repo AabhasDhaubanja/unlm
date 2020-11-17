@@ -15,14 +15,21 @@ const Footer = () => {
         <div className="bg-light py-md-4 py-3">
           <Container>
             <Row>
-              <Col xs={5}>
-                <h3>
-                  BECOME A<b> UNLM.</b>
-                </h3>
-                Subscribe for exclusive updates.
+              <Col md={5} xs={12}>
+                <Row>
+                  <Col xs={12} className="d-flex justify-content-center">
+                    <h3>
+                      BECOME A<b> UNLM.</b>
+                    </h3>
+                  </Col>
+                  <Col xs={12} className="d-flex justify-content-center">
+                    Subscribe for exclusive updates.
+                  </Col>
+                </Row>
               </Col>
               <Col
-                xs={7}
+                md={7}
+                xs={12}
                 className="d-flex justify-content-center align-items-center"
               >
                 <div className="form-group d-inline-flex">
@@ -41,14 +48,18 @@ const Footer = () => {
         <div className="bg-dark py-5">
           <Container className="text-white">
             <Row>
-              <Col xs={9}>
+              <Col md={9} xs={12}>
                 <Row>
-                  <Col xs={4} className="d-flex justify-content-center">
+                  <Col
+                    md={4}
+                    xs={12}
+                    className="d-md-flex d-none justify-content-center"
+                  >
                     <h3>
                       <b>UNLM.</b>
                     </h3>
                   </Col>
-                  <Col xs={4}>
+                  <Col md={4} xs={12}>
                     <ul>
                       <li>
                         <h5>
@@ -61,7 +72,7 @@ const Footer = () => {
                       <li>Cookies</li>
                     </ul>
                   </Col>
-                  <Col xs={4}>
+                  <Col md={4} xs={12}>
                     <ul>
                       <li>
                         <h5>
@@ -76,13 +87,14 @@ const Footer = () => {
                   </Col>
 
                   <Col
-                    xs={6}
-                    className="pt-5 d-flex justify-content-center align-items-center"
+                    md={6}
+                    xs={12}
+                    className="py-5 d-flex justify-content-center"
                   >
                     ©UNLM. All rights reserved
                   </Col>
-                  <Col xs={6} className="pt-5">
-                    <div className="px-md-5 mx-5 px-2 d-flex justify-content-between">
+                  <Col md={6} xs={12} className="py-5">
+                    <div className="d-flex justify-content-around">
                       <AiFillFacebook />
                       <AiOutlineTwitter />
                       <GrInstagram />
@@ -92,7 +104,7 @@ const Footer = () => {
                 </Row>
               </Col>
 
-              <div className="bottomRightButton col-3">
+              <Col md={3} xs={12} className="bottomRightButton">
                 <Row>
                   <Col xs={12} className="d-flex justify-content-center">
                     <div className="pb-4">
@@ -105,7 +117,7 @@ const Footer = () => {
                     </div>
                   </Col>
                 </Row>
-              </div>
+              </Col>
             </Row>
           </Container>
         </div>

@@ -14,6 +14,8 @@ export default function Default(props) {
     }
   }
 
+  React.useEffect(() => {}, []);
+
   return (
     <div>
       {navbar}

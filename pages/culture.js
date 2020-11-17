@@ -18,16 +18,6 @@ const Culture = () => {
   return (
     <Container className="py-5 my-5">
       <div className="cultureGridContainer">
-        {cultures.map((culture) => (
-          <div
-            key={culture.url}
-            className="cultureGridItem"
-            style={{
-              background: `url("${process.env.NEXT_PUBLIC_SERVER}/culture_page/${culture.url}")`,
-              backgroundSize: "cover",
-            }}
-          ></div>
-        ))}
         <div
           id="cultureGridText"
           className="cultureGridItem"
@@ -50,6 +40,16 @@ const Culture = () => {
             PageMaker including versions of Lorem Ipsum.
           </span>
         </div>
+        {cultures.map((culture) => (
+          <div
+            key={culture.url}
+            className="cultureGridItem"
+            style={{
+              background: `url("${process.env.NEXT_PUBLIC_SERVER}/culture_page/${culture.url}")`,
+              backgroundSize: "cover",
+            }}
+          ></div>
+        ))}
       </div>
     </Container>
   );
