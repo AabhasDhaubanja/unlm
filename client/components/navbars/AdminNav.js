@@ -21,8 +21,18 @@ const AdminNav = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <Link href="/admin/products">
-                <a href="/admin/products" className="nav-item nav-link">
+              <Link href="/admin/new">
+                <a href="/admin/new" className="nav-item nav-link">
+                  <span>NEW</span>
+                </a>
+              </Link>
+              <Link href="/admin/update">
+                <a href="/admin/update" className="nav-item nav-link">
+                  <span>UPDATE</span>
+                </a>
+              </Link>
+              <Link href="/discover/1">
+                <a href="/discover/1" className="nav-item nav-link">
                   <span>PRODUCTS</span>
                 </a>
               </Link>

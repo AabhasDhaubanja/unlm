@@ -5,10 +5,17 @@ import Default from "../client/layouts/Default";
 import { Provider } from "react-redux";
 import { useStore } from "../redux/store";
 import "../client/styles/globals.scss";
+import Loading from "../client/components/Loading";
 
 function MyApp({ Component, pageProps }) {
   const store = useStore(pageProps.initialReduxState);
-  const apolloClient = useApollo(pageProps.initialApolloState);
+
+  let [apolloClient, setApolloClient] = React.useState(null);
+
+  React.useEffect(() => {
+    const temp = useApollo(pageProps.initialApolloState);
+    setApolloClient(temp);
+  }, []);
 
   return (
     <div>
@@ -17,13 +24,17 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Provider store={store}>
-        <ApolloProvider client={apolloClient}>
-          <Default>
-            <Component {...pageProps} />
-          </Default>
-        </ApolloProvider>
-      </Provider>
+      {apolloClient ? (
+        <Provider store={store}>
+          <ApolloProvider client={apolloClient}>
+            <Default>
+              <Component {...pageProps} />
+            </Default>
+          </ApolloProvider>
+        </Provider>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

@@ -2,7 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
 import { Container } from "react-bootstrap";
-import { initializeApollo } from "../../lib/apolloClient";
+// import { initializeApollo } from "../../lib/apolloClient";
+import { checkAuth } from "../../client/hocs/checkAuth";
 import Products from "../../client/components/Products";
 import { GET_CATEGORY } from "../../lib/queries";
 
@@ -33,31 +34,33 @@ const Discover = () => {
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { id: "1" } },
-      { params: { id: "2" } },
-      { params: { id: "3" } },
-      { params: { id: "4" } },
-    ],
-    fallback: true,
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       { params: { id: "1" } },
+//       { params: { id: "2" } },
+//       { params: { id: "3" } },
+//       { params: { id: "4" } },
+//     ],
+//     fallback: true,
+//   };
+// }
 
-export async function getStaticProps({ params: { id } }) {
-  const apolloClient = initializeApollo();
+// export async function getStaticProps({ params: { id } }) {
+//   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
-    query: GET_CATEGORY,
-    variables: { id },
-  });
+//   await apolloClient.query({
+//     query: GET_CATEGORY,
+//     variables: { id },
+//   });
 
-  return {
-    props: {
-      initialApolloState: apolloClient.cache.extract(),
-    },
-  };
-}
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract(),
+//     },
+//   };
+// }
+
+export const getServerSideProps = checkAuth(GET_CATEGORY);
 
 export default Discover;

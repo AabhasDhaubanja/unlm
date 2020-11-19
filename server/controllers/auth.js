@@ -29,7 +29,7 @@ module.exports = {
           userObj,
           process.env.REFRESH_TOKEN_SECRET,
           {
-            expiresIn: 120,
+            expiresIn: "7d",
           }
         );
         const responseObj = {
@@ -37,7 +37,11 @@ module.exports = {
           user: userObj,
         };
 
-        res.cookie("refresh", refreshToken, { httpOnly: true });
+        res.cookie("refresh", refreshToken, {
+          httpOnly: true,
+          expires: false,
+          maxAge: 604800000,
+        });
 
         return res.send(JSON.stringify(responseObj));
       })(req, res, next);
@@ -45,7 +49,7 @@ module.exports = {
   },
 
   logout: () => {
-    return (req, res) => {
+    return (_, res) => {
       res.clearCookie("refresh").send("Logout Successful!");
     };
   },
@@ -80,11 +84,15 @@ module.exports = {
                 user,
                 process.env.REFRESH_TOKEN_SECRET,
                 {
-                  expiresIn: 120,
+                  expiresIn: "7d",
                 }
               );
 
-              res.cookie("refresh", newRefreshToken, { httpOnly: true });
+              res.cookie("refresh", newRefreshToken, {
+                httpOnly: true,
+                expire: false,
+                maxAge: 604800000,
+              });
 
               return res.send({ user, accessToken });
             }
@@ -92,6 +100,7 @@ module.exports = {
           }
         );
       } else {
+        console.log("here at 401");
         return res.status(401).send("Not authenticated");
       }
     };

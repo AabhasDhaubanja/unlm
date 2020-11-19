@@ -12,6 +12,7 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 // const app = next({});
 
+const dataCenter = require("./lib/dataCenter");
 const models = require("./server/models");
 const authRouter = require("./server/routes/auth");
 
@@ -55,15 +56,19 @@ app.prepare().then(() => {
     typeDefs,
     resolvers,
     context: ({ req }) => {
+      // const [_, token] = req.headers.authorization.split(" ");
+      // console.log(token);
+
       return {
         models,
+        dataCenter: dataCenter(models, false),
       };
     },
   });
 
   apolloServer.applyMiddleware({ app: server });
 
-  server.get("/", (req, res) => ssrCache({ req, res }));
+  // server.get("/", (req, res) => ssrCache({ req, res }));
 
   server.use("/auth", authRouter);
 

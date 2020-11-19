@@ -34,7 +34,11 @@ export const loggedOut = (Component, link) => {
 };
 
 export const nonAdmin = (Component, link) => {
-  return ({ initialReduxState: { users } }) => {
+  return (props) => {
+    let {
+      initialReduxState: { users },
+    } = props;
+
     React.useEffect(() => {
       if (
         !users.authenticated ||
@@ -53,6 +57,6 @@ export const nonAdmin = (Component, link) => {
       return <Loading />;
     }
 
-    return <Component />;
+    return <Component {...props} />;
   };
 };
