@@ -3,72 +3,45 @@ import { initializeStore } from "../../redux/store";
 import { AUTHENTICATE } from "../../redux/actionTypes";
 import { initializeApollo } from "../../lib/apolloClient";
 
-export const checkAuthFunction = async (ctx, dispatch) => {
-  const config = ctx.req.headers.cookie
-    ? {
-        withCredentials: true,
-        headers: {
-          Cookie: ctx.req.headers.cookie,
-        },
-      }
-    : {
-        withCredentials: true,
-      };
-
-  const {
-    data: { user, accessToken },
-  } = await axios.post(
-    `${process.env.NEXT_PUBLIC_SERVER}/auth/check`,
-    {},
-    config
-  );
-
-  dispatch({
-    type: AUTHENTICATE,
-    payload: {
-      user,
-      accessToken,
-      authenticated: true,
-    },
-  });
-};
-
 export const checkAuth = (QUERY) => {
   const reduxStore = initializeStore();
   const { dispatch } = reduxStore;
-  let token;
+  const {
+    users: { authenticated },
+  } = reduxStore.getState();
 
   return async (ctx) => {
     try {
-      const config = ctx.req.headers.cookie
-        ? {
-            withCredentials: true,
-            headers: {
-              Cookie: ctx.req.headers.cookie,
-            },
-          }
-        : {
-            withCredentials: true,
-          };
+      console.log(authenticated);
+      if (!authenticated) {
+        const config = ctx.req.headers.cookie
+          ? {
+              withCredentials: true,
+              headers: {
+                Cookie: ctx.req.headers.cookie,
+              },
+            }
+          : {
+              withCredentials: true,
+            };
 
-      const {
-        data: { user, accessToken },
-      } = await axios.post(
-        `${process.env.NEXT_PUBLIC_SERVER}/auth/check`,
-        {},
-        config
-      );
+        const {
+          data: { user, accessToken },
+        } = await axios.post(
+          `${process.env.NEXT_PUBLIC_SERVER}/auth/check`,
+          {},
+          config
+        );
 
-      token = accessToken;
-
-      dispatch({
-        type: AUTHENTICATE,
-        payload: {
-          user,
-          accessToken,
-          authenticated: true,
-        },
-      });
+        dispatch({
+          type: AUTHENTICATE,
+          payload: {
+            user,
+            accessToken,
+            authenticated: true,
+          },
+        });
+      }
     } catch (error) {
       console.log("-------------------------------");
       console.log(Object.keys(error), error.message);
@@ -90,11 +63,6 @@ export const checkAuth = (QUERY) => {
       await apolloClient.query({
         query: QUERY,
         variables: ctx.params,
-        context: {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : "",
-          },
-        },
       });
 
       return {

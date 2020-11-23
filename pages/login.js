@@ -1,9 +1,7 @@
 import Link from "next/link";
 import axios from "axios";
 import { Form, Button, Container } from "react-bootstrap";
-import { checkAuth } from "../client/hocs/checkAuth";
 import { loggedIn } from "../client/hocs/redirect";
-import err from "../client/helpers/err";
 
 const Login = () => {
   const [state, setState] = React.useState({
@@ -21,7 +19,7 @@ const Login = () => {
       .then((_) => {
         window.location.reload();
       })
-      .catch(err);
+      .catch((err) => console.log(err));
   };
 
   const emailHandler = (e) => {
@@ -87,6 +85,4 @@ const Login = () => {
   );
 };
 
-export const getServerSideProps = checkAuth();
-
-export default loggedIn(Login, "/profile");
+export default loggedIn(Login);

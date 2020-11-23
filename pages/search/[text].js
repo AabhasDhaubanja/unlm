@@ -1,20 +1,15 @@
-import { useRouter } from "next/router";
+import { initializeApollo } from "../../lib/apolloClient";
 import { useQuery } from "@apollo/client";
-
 import { SEARCH_QUERY } from "../../lib/queries";
-
 import Products from "../../client/components/Products";
+import Loading from "../../client/components/Loading";
 
-const Search = () => {
-  const router = useRouter();
-  const { text } = router.query;
-  console.log("text", text);
-
+const Search = ({ text }) => {
   const { loading, error, data } = useQuery(SEARCH_QUERY, {
     variables: { text },
   });
 
-  if (loading) return "Loading ...";
+  if (loading) return <Loading />;
   if (error) return JSON.stringify(error);
 
   const { search } = data;
@@ -28,5 +23,21 @@ const Search = () => {
     </div>
   );
 };
+
+export async function getServerSideProps({ params: { text } }) {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: SEARCH_QUERY,
+    variables: { text },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+      text,
+    },
+  };
+}
 
 export default Search;

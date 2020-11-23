@@ -1,4 +1,3 @@
-import { checkAuth } from "../../client/hocs/checkAuth";
 import { nonAdmin } from "../../client/hocs/redirect";
 
 const Update = () => {
@@ -9,6 +8,4 @@ const Update = () => {
   );
 };
 
-export const getServerSideProps = checkAuth();
-
-export default nonAdmin(Update, "/login");
+export default nonAdmin(Update);

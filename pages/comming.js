@@ -1,5 +1,4 @@
 import { FaCog } from "react-icons/fa";
-import { checkAuth } from "../client/hocs/checkAuth";
 
 const Comming = () => {
   return (
@@ -15,7 +14,5 @@ const Comming = () => {
     </div>
   );
 };
-
-export const getServerSideProps = checkAuth();
 
 export default Comming;

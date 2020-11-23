@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "../../hocs/AuthProvider";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 import { Navbar, Nav } from "react-bootstrap";
 import { GoSearch } from "react-icons/go";
 
 const DefaultNavbar = () => {
-  const { authenticated } = useSelector((state) => state.users);
+  const { authenticated } = useContext(AuthContext);
 
   const router = useRouter();
 

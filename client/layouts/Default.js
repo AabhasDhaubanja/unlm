@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { AuthContext } from "../hocs/AuthProvider";
 import Navbar from "../components/navbars/DefaultNavbar";
 import AdminNav from "../components/navbars/AdminNav";
 import Footer from "../components/Footer";
 
 export default function Default(props) {
-  const { user } = useSelector((state) => state.users);
+  const { user } = useContext(AuthContext);
 
   let navbar = <Navbar />;
 

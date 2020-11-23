@@ -1,27 +1,24 @@
 import Link from "next/link";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import { useRouter } from "next/router";
 import { useQuery } from "@apollo/client";
-import { checkAuth } from "../../client/hocs/checkAuth";
-import { GET_PRODUCT, GET_CATEGORY } from "../../lib/queries";
+import { initializeApollo } from "../../lib/apolloClient";
+import { GET_PRODUCT_PAGE } from "../../lib/queries";
 import Products from "../../client/components/Products";
 import Loading from "../../client/components/Loading";
 
-const Product = () => {
-  const router = useRouter();
-  const { id } = router.query;
+const Product = ({ id, ...rest }) => {
+  const { loading, error, data } = useQuery(GET_PRODUCT_PAGE, {
+    variables: { id },
+  });
 
-  const { loading, error, data } = useQuery(GET_PRODUCT, { variables: { id } });
-
-  if (loading) return "Loading ...";
+  if (loading) return <Loading />;
   if (error) return JSON.stringify(error);
 
-  const { product } = data;
   const {
-    loading: loadingS,
-    error: errorS,
-    data: dataS,
-  } = useQuery(GET_CATEGORY, { variables: { id: product.categoryId } });
+    productPage: { product, similar },
+  } = data;
+
+  if (!product) return <Loading />;
 
   return (
     <>
@@ -67,23 +64,33 @@ const Product = () => {
           </Col>
         </Row>
       </Container>
-      {!errorS && !loadingS && dataS ? (
-        <Products
-          title={
-            <div className="h4">
-              <b>SIMILAR.</b>
-              <span> PRODUCTS</span>
-            </div>
-          }
-          products={dataS.products}
-        />
-      ) : (
-        <Loading />
-      )}
+      <Products
+        title={
+          <div className="h4">
+            <b>SIMILAR.</b>
+            <span> PRODUCTS</span>
+          </div>
+        }
+        products={similar}
+      />
     </>
   );
 };
 
-export const getServerSideProps = checkAuth(GET_PRODUCT);
+export async function getServerSideProps({ params: { id } }) {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_PRODUCT_PAGE,
+    variables: { id },
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+      id,
+    },
+  };
+}
 
 export default Product;

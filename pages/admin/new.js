@@ -2,14 +2,9 @@ import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../lib/queries";
-import { checkAuth } from "../../client/hocs/checkAuth";
 import { nonAdmin } from "../../client/hocs/redirect";
 
-const New = ({
-  initialReduxState: {
-    users: { accessToken },
-  },
-}) => {
+const New = () => {
   const [addProduct] = useMutation(ADD_PRODUCT);
 
   const [state, setState] = useState({
@@ -45,11 +40,11 @@ const New = ({
         price: parseInt(state.price),
         categoryId: state.categoryId.toString(),
       },
-      context: {
-        headers: {
-          Authorization: accessToken ? `Bearer ${accessToken}` : "",
-        },
-      },
+      // context: {
+      //   headers: {
+      //     Authorization: accessToken ? `Bearer ${accessToken}` : "",
+      //   },
+      // },
     });
   };
 
@@ -103,6 +98,4 @@ const New = ({
   );
 };
 
-export const getServerSideProps = checkAuth();
-
-export default nonAdmin(New, "/login");
+export default nonAdmin(New);

@@ -1,62 +1,46 @@
 import React from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "./AuthProvider";
 import Loading from "../components/Loading";
 
-export const loggedIn = (Component, link) => {
-  return ({ initialReduxState: { users } }) => {
-    React.useEffect(() => {
-      if (users.authenticated) {
-        window.location.href = link;
+export function loggedIn(Component) {
+  return () => {
+    const { authenticated } = useContext(AuthContext);
+
+    useEffect(() => {
+      if (authenticated) {
+        window.location.href = "/profile";
       }
-    }, []);
+    }, [authenticated]);
 
-    if (users.authenticated) {
-      return <Loading />;
-    }
-
-    return <Component />;
+    return authenticated ? <Loading /> : <Component />;
   };
-};
+}
 
-export const loggedOut = (Component, link) => {
-  return ({ initialReduxState: { users } }) => {
-    React.useEffect(() => {
-      if (!users.authenticated) {
-        window.location.href = link;
+export function loggedOut(Component) {
+  return () => {
+    const { authenticated } = useContext(AuthContext);
+
+    useEffect(() => {
+      if (!authenticated) {
+        window.location.href = "/login";
       }
-    }, []);
+    }, [authenticated]);
 
-    if (!users.authenticated) {
-      return <Loading />;
-    }
-
-    return <Component />;
+    return !authenticated ? <Loading /> : <Component />;
   };
-};
+}
 
-export const nonAdmin = (Component, link) => {
-  return (props) => {
-    let {
-      initialReduxState: { users },
-    } = props;
+export const nonAdmin = (Component) => {
+  return () => {
+    const { user } = useContext(AuthContext);
 
-    React.useEffect(() => {
-      if (
-        !users.authenticated ||
-        !users.user.role ||
-        users.user.role !== "admin"
-      ) {
-        window.location.href = link;
+    useEffect(() => {
+      if (!user || user.role !== "admin") {
+        window.location.href = "/";
       }
-    }, []);
+    }, [user]);
 
-    if (
-      !users.authenticated ||
-      !users.user.role ||
-      users.user.role !== "admin"
-    ) {
-      return <Loading />;
-    }
-
-    return <Component {...props} />;
+    return !user || user.role !== "admin" ? <Loading /> : <Component />;
   };
 };
