@@ -29,15 +29,25 @@ const Culture = () => {
             CULTURE OF <b>U</b>
           </h2>
           <span>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
+            <p>Land of Buddha. Land of Culture.</p>
+
+            <p>
+              The idea for UNML came from the symbol of unalome. It represents
+              the path to enlightenment in the Buddhist culture. Life is full of
+              twists and turns and that’s what the spirals in the symbol
+              symbolise, and the straight line is the moment one reaches peace.
+            </p>
+
+            <p>
+              Hence the idea for UNLM was born- to connect people through the
+              symbol of unalome- through art of lifestyle- wherein one finds
+              peace and harmony in chaos- the art of finding comfort.
+            </p>
+
+            <p>
+              UNML is all about representing lifestyle and culture through
+              apparel and accessories.
+            </p>
           </span>
         </div>
         {cultures.map((culture) => (

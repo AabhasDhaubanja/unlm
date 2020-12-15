@@ -20,16 +20,11 @@ const New = () => {
     setState(newState);
   };
 
-  const imageHandler = ({
-    target: {
-      validity,
-      files: [file],
-    },
-  }) => {
+  const imageHandler = ({ target: { validity, files } }) => {
     if (validity.valid)
       setState({
         ...state,
-        file,
+        files,
       });
   };
 
@@ -40,11 +35,6 @@ const New = () => {
         price: parseInt(state.price),
         categoryId: state.categoryId.toString(),
       },
-      // context: {
-      //   headers: {
-      //     Authorization: accessToken ? `Bearer ${accessToken}` : "",
-      //   },
-      // },
     });
   };
 
@@ -87,6 +77,7 @@ const New = () => {
           type="file"
           placeholder="Upload Images"
           onChange={imageHandler}
+          multiple
           required
         />
       </Form.Group>

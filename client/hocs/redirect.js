@@ -32,7 +32,7 @@ export function loggedOut(Component) {
 }
 
 export const nonAdmin = (Component) => {
-  return () => {
+  return (props) => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -41,6 +41,10 @@ export const nonAdmin = (Component) => {
       }
     }, [user]);
 
-    return !user || user.role !== "admin" ? <Loading /> : <Component />;
+    return !user || user.role !== "admin" ? (
+      <Loading />
+    ) : (
+      <Component {...props} />
+    );
   };
 };

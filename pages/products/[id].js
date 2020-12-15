@@ -1,12 +1,16 @@
 import Link from "next/link";
+import { useContext } from "react";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
+import { AuthContext } from "../../client/hocs/AuthProvider";
 import { initializeApollo } from "../../lib/apolloClient";
 import { GET_PRODUCT_PAGE } from "../../lib/queries";
 import Products from "../../client/components/Products";
 import Loading from "../../client/components/Loading";
 
 const Product = ({ id, ...rest }) => {
+  const authContext = useContext(AuthContext);
+
   const { loading, error, data } = useQuery(GET_PRODUCT_PAGE, {
     variables: { id },
   });
@@ -40,11 +44,22 @@ const Product = ({ id, ...rest }) => {
             <div className="productTitle">{product.name}</div>
             <div className="productPrice">$ {product.price}</div>
             <div className="py-5">
-              <Link href="/comming">
-                <Button variant="dark">
-                  <b>ADD TO CART</b>
-                </Button>
-              </Link>
+              {authContext &&
+              authContext.user &&
+              authContext.user.role &&
+              authContext.user.role === "admin" ? (
+                <Link href={`/admin/update/${product.id}`}>
+                  <Button variant="dark">
+                    <b>UPDATE PRODUCT</b>
+                  </Button>
+                </Link>
+              ) : (
+                <Link href="/comming">
+                  <Button variant="dark">
+                    <b>ADD TO CART</b>
+                  </Button>
+                </Link>
+              )}
             </div>
             <div>
               <h4>DESCRIPTION</h4>

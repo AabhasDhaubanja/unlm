@@ -3,48 +3,52 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   login: (passport) => {
     return (req, res, next) => {
-      passport.authenticate("local", { session: false }, function (
-        err,
-        user,
-        info
-      ) {
-        if (err) {
-          return next(err);
-        }
-        if (!user) {
-          return res.status(400).send(info.message);
-        }
-
-        const userObj = {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          role: user.role,
-        };
-
-        const accessToken = jwt.sign(userObj, process.env.ACCESS_TOKEN_SECRET, {
-          expiresIn: 60,
-        });
-        const refreshToken = jwt.sign(
-          userObj,
-          process.env.REFRESH_TOKEN_SECRET,
-          {
-            expiresIn: "7d",
+      passport.authenticate(
+        "local",
+        { session: false },
+        function (err, user, info) {
+          if (err) {
+            return next(err);
           }
-        );
-        const responseObj = {
-          accessToken: accessToken,
-          user: userObj,
-        };
+          if (!user) {
+            return res.status(400).send(info.message);
+          }
 
-        res.cookie("refresh", refreshToken, {
-          httpOnly: true,
-          expires: false,
-          maxAge: 604800000,
-        });
+          const userObj = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            role: user.role,
+          };
 
-        return res.send(JSON.stringify(responseObj));
-      })(req, res, next);
+          const accessToken = jwt.sign(
+            userObj,
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+              expiresIn: 10 * 60,
+            }
+          );
+          const refreshToken = jwt.sign(
+            userObj,
+            process.env.REFRESH_TOKEN_SECRET,
+            {
+              expiresIn: "7d",
+            }
+          );
+          const responseObj = {
+            accessToken: accessToken,
+            user: userObj,
+          };
+
+          res.cookie("refresh", refreshToken, {
+            httpOnly: true,
+            expires: false,
+            maxAge: 604800000,
+          });
+
+          return res.send(JSON.stringify(responseObj));
+        }
+      )(req, res, next);
     };
   },
 
@@ -76,7 +80,7 @@ module.exports = {
                 user,
                 process.env.ACCESS_TOKEN_SECRET,
                 {
-                  expiresIn: 60,
+                  expiresIn: 10 * 60,
                 }
               );
 

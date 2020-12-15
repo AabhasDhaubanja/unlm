@@ -15,28 +15,28 @@ module.exports = {
       "Products",
       [
         {
-          name: "Casual Shoes",
+          name: "Sweater",
           price: 2080,
           categoryId: 6,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Curry 4",
+          name: "Camera Bag",
           price: 21080,
           categoryId: 6,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Plain Shirt",
+          name: "Bag",
           price: 1000,
           categoryId: 5,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Running Shorts",
+          name: "Down Jacket",
           price: 5000,
           categoryId: 7,
           createdAt: new Date(),

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 const Products = ({ title, products }) => {
+  console.log(products);
   return (
     <>
       {title ? (
@@ -32,10 +33,10 @@ const Products = ({ title, products }) => {
                       <Card.Img
                         variant="top"
                         style={{
-                          height: 220,
-                          width: "auto",
+                          width: "100%",
+                          height: "auto",
                         }}
-                        src={`${process.env.NEXT_PUBLIC_SERVER}/products_page/${product.Images[0].url}`}
+                        src={`/products_page${product.Images[0].url}`}
                       />
                     </div>
                     <Card.Body>
