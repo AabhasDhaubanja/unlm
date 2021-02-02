@@ -31,7 +31,7 @@ const AuthProvider = ({ children, initialApolloState }) => {
 
       try {
         const { data } = await axios.post(
-          `${process.env.NEXT_PUBLIC_SERVER}/auth/check`,
+          `/auth/check`,
           {},
           {
             withCredentials: true,

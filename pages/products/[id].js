@@ -34,7 +34,7 @@ const Product = ({ id, ...rest }) => {
                 <Col key={url} xs={12}>
                   <Image
                     className="productImages"
-                    src={`${process.env.NEXT_PUBLIC_SERVER}/products_page/${url}`}
+                    src={`/products_page/${url}`}
                   />
                 </Col>
               ))}

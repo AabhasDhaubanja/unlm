@@ -1,25 +1,33 @@
 import Link from "next/link";
+import { useState } from "react";
 import axios from "axios";
 import { Form, Button, Container } from "react-bootstrap";
 import { loggedIn } from "../client/hocs/redirect";
 
 const Login = () => {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     email: null,
     password: null,
   });
 
+  const [loading, setLoading] = useState(false);
+
+  const enterHandler = ({ keyCode }) => {
+    if (keyCode === 13) {
+      loginHandler();
+    }
+  };
+
   const loginHandler = () => {
+    setLoading(true);
+
     axios
-      .post(
-        `${process.env.NEXT_PUBLIC_SERVER}/auth/login`,
-        { ...state },
-        { withCredentials: true }
-      )
+      .post(`/auth/login`, { ...state }, { withCredentials: true })
       .then((_) => {
         window.location.reload();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err))
+      .finally(() => setLoading(false));
   };
 
   const emailHandler = (e) => {
@@ -37,7 +45,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="py-5">
       <div
         style={{
           height: "50vh",
@@ -63,12 +71,19 @@ const Login = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               onChange={passwordHandler}
+              onKeyUp={enterHandler}
               type="password"
               placeholder="Password"
             />
           </Form.Group>
           <Button onClick={loginHandler} variant="dark">
-            SignIn
+            {loading ? (
+              <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden"> </span>
+              </div>
+            ) : (
+              <span>SignIn</span>
+            )}
           </Button>
           <div className="pointer py-5">
             <span>Don't have an account?</span>

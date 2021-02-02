@@ -24,10 +24,7 @@ const Products = ({ title, products }) => {
                 xs={12}
                 className="d-flex justify-content-center pb-5"
               >
-                <Link
-                  href="/products/[id]"
-                  as={`${process.env.NEXT_PUBLIC_SERVER}/products/${product.id}`}
-                >
+                <Link href="/products/[id]" as={`/products/${product.id}`}>
                   <Card style={{ width: "18rem", cursor: "pointer" }}>
                     <div className="d-flex justify-content-center">
                       <Card.Img
