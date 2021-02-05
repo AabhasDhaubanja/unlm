@@ -37,8 +37,9 @@
     "sass": "^1.30.0",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
-  },
+  }, 
   "resolutions": {
-    "**/**/fs-capacitor": "^5.0.0"
+    "**/**/fs-capacitor":"^6.2.0",
+    "**/graphql-upload": "^11.0.0"
   }
 }

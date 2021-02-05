@@ -57,8 +57,6 @@ app.prepare().then(() => {
 
   apolloServer.applyMiddleware({ app: server });
 
-  // server.get("/", (req, res) => ssrCache({ req, res }));
-
   server.use("/auth", authRouter);
 
   server.get("*", (req, res) => handle(req, res));

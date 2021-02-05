@@ -54,39 +54,39 @@ const Login = () => {
         }}
       >
         <div className="container">
-          <div class="mb-3">
-            <label for="loginEmail" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="loginEmail" className="form-label">
               Email address
             </label>
             <input
               onChange={emailHandler}
               type="email"
-              class="form-control"
+              className="form-control"
               id="loginEmail"
               aria-describedby="emailHelp"
             />
-            <div id="emailHelp" class="form-text">
+            <div id="emailHelp" className="form-text">
               We'll never share your email with anyone else.
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="loginPassword" class="form-label">
+          <div className="mb-3">
+            <label htmlFor="loginPassword" className="form-label">
               Password
             </label>
             <input
               onChange={passwordHandler}
               onKeyUp={enterHandler}
               type="password"
-              class="form-control"
+              className="form-control"
               id="loginPassword"
               aria-describedby="emailHelp"
             />
           </div>
           <button onClick={loginHandler} className="btn btn-dark">
             {loading ? (
-              <div class="spinner-border text-light" role="status">
-                <span class="visually-hidden"> </span>
+              <div className="spinner-border text-light" role="status">
+                <span className="visually-hidden"> </span>
               </div>
             ) : (
               <span>SignIn</span>

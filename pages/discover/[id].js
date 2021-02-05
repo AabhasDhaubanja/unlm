@@ -16,7 +16,10 @@ const Discover = ({ id }) => {
 
   return (
     <div className="pb-5">
-      <div className="container py-5 px-5 d-flex justify-content-end" fluid>
+      <div
+        className="container py-5 px-5 d-flex justify-content-end"
+        fluid="true"
+      >
         <Link href="/categories">
           <u className="px-5" style={{ cursor: "pointer", fontSize: "1.5rem" }}>
             All Categories
