@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios from "axios";
-import { Button } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import { loggedOut } from "../client/hocs/redirect";
 
@@ -31,7 +30,7 @@ const Profile = () => {
           <FaUserCircle />
         </div>
         <div className="d-flex justify-content-center">
-          <Button variant="danger" onClick={logoutHandler}>
+          <button className="btn btn-danger" onClick={logoutHandler}>
             {loading ? (
               <div class="spinner-border text-light" role="status">
                 <span class="visually-hidden"> </span>
@@ -39,7 +38,7 @@ const Profile = () => {
             ) : (
               <span>Logout</span>
             )}
-          </Button>
+          </button>
         </div>
       </div>
     </div>

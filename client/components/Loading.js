@@ -1,5 +1,3 @@
-import { Spinner } from "react-bootstrap";
-
 const Loading = () => {
   return (
     <div
@@ -10,9 +8,9 @@ const Loading = () => {
         alignItems: "center",
       }}
     >
-      <Spinner animation="border" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
+      <div className="spinner-border text-dark" role="status">
+        <span className="visually-hidden"> </span>
+      </div>
     </div>
   );
 };

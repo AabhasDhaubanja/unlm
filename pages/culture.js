@@ -1,5 +1,3 @@
-import { Container } from "react-bootstrap";
-
 const Culture = () => {
   const cultures = [
     {
@@ -16,7 +14,7 @@ const Culture = () => {
     },
   ];
   return (
-    <Container className="py-5 my-5">
+    <div className="container py-5 my-5">
       <div className="cultureGridContainer">
         <div
           id="cultureGridText"
@@ -61,7 +59,7 @@ const Culture = () => {
           ></div>
         ))}
       </div>
-    </Container>
+    </div>
   );
 };
 

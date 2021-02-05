@@ -1,7 +1,4 @@
-import { Container, Row, Col } from "react-bootstrap";
-
 import { withRouter } from "next/router";
-
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 
 class CategoryMenu extends React.Component {
@@ -52,14 +49,12 @@ class CategoryMenu extends React.Component {
 
   backFormatHandler = () => {
     return this.state.history.length > 1 ? (
-      <Col xs={12} onClick={this.popHandler} className="h3 pb-3">
+      <div onClick={this.popHandler} className="col-12 h3 pb-3">
         <BsChevronLeft />
         Back
-      </Col>
+      </div>
     ) : (
-      <Col xs={12} className="h3 pb-3">
-        &nbsp;
-      </Col>
+      <div className="col-12 h3 pb-3">&nbsp;</div>
     );
   };
 
@@ -74,16 +69,16 @@ class CategoryMenu extends React.Component {
       <div className="pl-5">
         <b>
           {menuItems.map((item) => (
-            <Col
-              xs={12}
+            <div
               key={item.name}
               onClick={() => this.menuClickHandler(item)}
+              className="col-12"
             >
               <span className="h2 pr-4">{item.name}</span>
               <span>
                 <BsChevronRight />
               </span>
-            </Col>
+            </div>
           ))}
         </b>
       </div>
@@ -92,14 +87,14 @@ class CategoryMenu extends React.Component {
 
   render() {
     return (
-      <Row>
-        <Col xl={6} lg={5} md={6} xs={12}>
-          <Row>
+      <div className="row">
+        <div className="col-xl-6 col-lg-5 col-md-6 col-12">
+          <div>
             {this.backFormatHandler()}
             {this.menuFormatHandler(this.state.history)}
-          </Row>
-        </Col>
-      </Row>
+          </div>
+        </div>
+      </div>
     );
   }
 }

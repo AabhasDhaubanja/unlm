@@ -1,13 +1,11 @@
-import { Container, Row, Col } from "react-bootstrap";
-
 const MenWomenKids = () => {
   let genders = [
     {
       name: (
         <>
-          <Row className="d-flex justify-content-center">
+          <div className="row justify-content-center">
             <h1>Men</h1>
-          </Row>
+          </div>
         </>
       ),
       image: "/index/men.jpg",
@@ -16,9 +14,9 @@ const MenWomenKids = () => {
     {
       name: (
         <>
-          <Row className="d-flex justify-content-center">
+          <div className="row justify-content-center">
             <h1>Women</h1>
-          </Row>
+          </div>
         </>
       ),
       image: "/index/women.jpeg",
@@ -27,14 +25,10 @@ const MenWomenKids = () => {
   ];
 
   return (
-    <Container className="p-5 my-5" fluid>
-      <Row>
+    <div className="container-fluid p-5 my-5">
+      <div>
         {genders.map((gender) => (
-          <Col
-            key={gender.key}
-            xs={6}
-            className="d-flex justify-content-center"
-          >
+          <div key={gender.key} className="col-6 d-flex justify-content-center">
             <div
               style={{
                 background: `url("${process.env.NEXT_PUBLIC_SERVER}${gender.image}")`,
@@ -51,14 +45,14 @@ const MenWomenKids = () => {
                 <span style={{ fontWeight: "900", textTransform: "uppercase" }}>
                   {gender.name}
                 </span>
-                <Row className="d-flex justify-content-center">SHOP NOW</Row>
+                <div className="row justify-content-center">SHOP NOW</div>
               </div>
             </div>
-          </Col>
+          </div>
         ))}
         {/* <div className="display-1">SHOP NOW</div> */}
-      </Row>
-    </Container>
+      </div>
+    </div>
   );
 };
 

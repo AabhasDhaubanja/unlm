@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useQuery } from "@apollo/client";
-import { Container } from "react-bootstrap";
 import { initializeApollo } from "../../lib/apolloClient";
 import Products from "../../client/components/Products";
 import { GET_CATEGORY } from "../../lib/queries";
@@ -17,13 +16,13 @@ const Discover = ({ id }) => {
 
   return (
     <div className="pb-5">
-      <Container className="py-5 px-5 d-flex justify-content-end" fluid>
+      <div className="container py-5 px-5 d-flex justify-content-end" fluid>
         <Link href="/categories">
           <u className="px-5" style={{ cursor: "pointer", fontSize: "1.5rem" }}>
             All Categories
           </u>
         </Link>
-      </Container>
+      </div>
       <Products products={products} />
     </div>
   );

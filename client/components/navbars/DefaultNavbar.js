@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { useContext } from "react";
-import { AuthContext } from "../../hocs/AuthProvider";
 import { useRouter } from "next/router";
-import { Navbar, Nav } from "react-bootstrap";
+import { useContext } from "react";
 import { GoSearch } from "react-icons/go";
+import { AuthContext } from "../../hocs/AuthProvider";
 
 const DefaultNavbar = () => {
   const { authenticated } = useContext(AuthContext);
@@ -21,66 +20,63 @@ const DefaultNavbar = () => {
   };
 
   return (
-    <React.Fragment>
-      <div className="fixed-top bg-white">
-        <Navbar
-          className="justify-content-between align-items-center"
-          expand="md"
-        >
-          <div className="d-flex">
-            <div className="customNavBrand">
-              <Link href="/">
-                <div className="pointer">
-                  <b>UNLM.</b>
-                </div>
-              </Link>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white">
+      <div className="container-fluid">
+        <div className="customNavBrand">
+          <Link href="/">
+            <div className="pointer">
+              <b>UNLM.</b>
             </div>
-            <div className="searchBoxContainer">
-              <div className="searchBox">
-                <GoSearch onClick={searchHandler} />
-                <span className="pl-2">
-                  <input
-                    type="text"
-                    placeholder="search"
-                    onChange={textHandler}
-                    onKeyDown={({ key }) => {
-                      if (key == "Enter") {
-                        searchHandler();
-                      }
-                    }}
-                  />
-                </span>
-              </div>
-            </div>
+          </Link>
+        </div>
+        <div className="searchBoxContainer">
+          <div className="searchBox">
+            <GoSearch onClick={searchHandler} />
+            <span className="ps-2">
+              <input
+                type="text"
+                placeholder="search"
+                onChange={textHandler}
+                onKeyDown={({ key }) => {
+                  if (key == "Enter") {
+                    searchHandler();
+                  }
+                }}
+              />
+            </span>
           </div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto">
-              {/* <Link href="/discover/[id]" as="/discover/1">
-              <a className="nav-item nav-link">DISCOVER</a>
-            </Link> */}
-              {authenticated ? (
-                <Link href="/profile">
-                  <a className="nav-item nav-link">PROFILE</a>
-                </Link>
-              ) : (
-                <Link href="/login">
-                  <a className="nav-item nav-link">LOGIN</a>
-                </Link>
-              )}
-              <Link href="/culture">
-                <a href="/culture" className="nav-item nav-link">
-                  <span className="cultureForU">CULTURE OF U</span>
-                </a>
+        </div>
+        <button
+          className="navbar-toggler ms-auto"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="navbar-nav ms-auto">
+            {authenticated ? (
+              <Link href="/profile">
+                <span className="nav-item nav-link pointer">PROFILE</span>
               </Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+            ) : (
+              <Link href="/login">
+                <span className="nav-item nav-link pointer">LOGIN</span>
+              </Link>
+            )}
+            <Link href="/culture">
+              <span className="cultureForU nav-item nav-link pointer">
+                CULTURE OF U
+              </span>
+            </Link>
+          </div>
+        </div>
       </div>
-      <div style={{ height: 50, background: "red" }}>
-        You are not supposed to see this.
-      </div>
-    </React.Fragment>
+    </nav>
   );
 };
 

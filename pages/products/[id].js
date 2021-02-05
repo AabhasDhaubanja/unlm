@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useContext } from "react";
-import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { useQuery } from "@apollo/client";
 import { AuthContext } from "../../client/hocs/AuthProvider";
 import { initializeApollo } from "../../lib/apolloClient";
@@ -26,21 +25,21 @@ const Product = ({ id, ...rest }) => {
 
   return (
     <>
-      <Container className="py-5 mt-5">
-        <Row>
-          <Col md={6} xs={12}>
-            <Row>
+      <div className="container py-5 mt-5">
+        <div className="row">
+          <div className="col-md-6 col-12">
+            <div className="row">
               {product.Images.map(({ url }) => (
-                <Col key={url} xs={12}>
-                  <Image
+                <div key={url} className="col-12">
+                  <img
                     className="productImages"
                     src={`/products_page/${url}`}
                   />
-                </Col>
+                </div>
               ))}
-            </Row>
-          </Col>
-          <Col md={6} xs={12}>
+            </div>
+          </div>
+          <div className="col-md-6 col-12">
             <div className="productTitle">{product.name}</div>
             <div className="productPrice">$ {product.price}</div>
             <div className="py-5">
@@ -49,15 +48,15 @@ const Product = ({ id, ...rest }) => {
               authContext.user.role &&
               authContext.user.role === "admin" ? (
                 <Link href={`/admin/update/${product.id}`}>
-                  <Button variant="dark">
+                  <button className="btn btn-dark">
                     <b>UPDATE PRODUCT</b>
-                  </Button>
+                  </button>
                 </Link>
               ) : (
                 <Link href="/comming">
-                  <Button variant="dark">
+                  <button className="btn btn-dark">
                     <b>ADD TO CART</b>
-                  </Button>
+                  </button>
                 </Link>
               )}
             </div>
@@ -76,9 +75,9 @@ const Product = ({ id, ...rest }) => {
               publishing software like Aldus PageMaker including versions of
               Lorem Ipsum.
             </div>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
       <Products
         title={
           <div className="h4">

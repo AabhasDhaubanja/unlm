@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { ADD_PRODUCT } from "../../lib/queries";
 import { nonAdmin } from "../../client/hocs/redirect";
 
 const New = () => {
   const [addProduct] = useMutation(ADD_PRODUCT);
+
+  const [loading, setLoading] = useState(false);
 
   const [state, setState] = useState({
     name: "Default Product",
@@ -28,64 +29,94 @@ const New = () => {
       });
   };
 
-  const createHandler = () => {
-    addProduct({
+  const createHandler = async () => {
+    setLoading(true);
+
+    const product = await addProduct({
       variables: {
         ...state,
         price: parseInt(state.price),
         categoryId: state.categoryId.toString(),
       },
     });
+
+    console.log(product);
+
+    setLoading(false);
   };
 
   return (
-    <Container className="py-5 mt-5">
-      <Form.Group>
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          type="text"
+    <div className="container py-5 mt-5">
+      <div className="mb-3">
+        <label htmlFor="newProductName" className="form-label">
+          Enter name
+        </label>
+        <input
           onChange={inputHandler}
+          placeholder="Enter Name"
           name="name"
-          placeholder="Enter name"
-          onChange={inputHandler}
+          type="text"
+          className="form-control"
+          id="newProductName"
+          aria-describedby="productName"
         />
-      </Form.Group>
+      </div>
 
-      <Form.Group>
-        <Form.Label>Price</Form.Label>
-        <Form.Control
-          type="number"
-          name="price"
+      <div className="mb-3">
+        <label htmlFor="newProductPrice" className="form-label">
+          Price
+        </label>
+        <input
+          onChange={inputHandler}
           placeholder="Enter Price"
-          onChange={inputHandler}
-        />
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Category</Form.Label>
-        <Form.Control
+          name="price"
           type="number"
-          name="categoryId"
-          placeholder="Enter Category"
-          onChange={inputHandler}
+          className="form-control"
+          id="newProductPrice"
+          aria-describedby="productPrice"
         />
-      </Form.Group>
+      </div>
 
-      <Form.Group>
-        <Form.Label>Images</Form.Label>
-        <Form.Control
+      <div className="mb-3">
+        <label htmlFor="newProductCategory" className="form-label">
+          Category
+        </label>
+        <input
+          onChange={inputHandler}
+          placeholder="Enter Category"
+          name="categoryId"
+          type="number"
+          className="form-control"
+          id="newProductCategory"
+          aria-describedby="productCategory"
+        />
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="newProductImages" className="form-label">
+          Images
+        </label>
+        <input
           type="file"
           placeholder="Upload Images"
           onChange={imageHandler}
+          id="newProductImages"
+          className="form-control"
           multiple
           required
         />
-      </Form.Group>
+      </div>
 
-      <Button variant="dark" type="submit" onClick={createHandler}>
-        Create
-      </Button>
-    </Container>
+      <button className="btn btn-dark" type="submit" onClick={createHandler}>
+        {loading ? (
+          <div className="spinner-border text-light" role="status">
+            <span className="visually-hidden"></span>
+          </div>
+        ) : (
+          <span>Create</span>
+        )}
+      </button>
+    </div>
   );
 };
 

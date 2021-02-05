@@ -1,34 +1,30 @@
 import Link from "next/link";
 
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-
 const Products = ({ title, products }) => {
   console.log(products);
   return (
     <>
       {title ? (
-        <Container>
-          <Row className="d-flex justify-content-center p-5 mt-5">{title}</Row>
-        </Container>
+        <div className="container">
+          <div className="row justify-content-center p-5 mt-5">{title}</div>
+        </div>
       ) : null}
 
       {products.length ? (
-        <Container fluid>
-          <Row>
+        <div className="container">
+          <div className="row">
             {products.map((product) => (
-              <Col
+              <div
                 key={product.id}
-                lg={3}
-                md={4}
-                sm={6}
-                xs={12}
-                className="d-flex justify-content-center pb-5"
+                className="col-lg-3 col-md-4 col-sm-6 col-12 d-flex justify-content-center pb-5"
               >
                 <Link href="/products/[id]" as={`/products/${product.id}`}>
-                  <Card style={{ width: "18rem", cursor: "pointer" }}>
+                  <div
+                    className="card"
+                    style={{ width: "18rem", cursor: "pointer" }}
+                  >
                     <div className="d-flex justify-content-center">
-                      <Card.Img
-                        variant="top"
+                      <img
                         style={{
                           width: "100%",
                           height: "auto",
@@ -36,20 +32,20 @@ const Products = ({ title, products }) => {
                         src={`/products_page${product.Images[0].url}`}
                       />
                     </div>
-                    <Card.Body>
-                      <Card.Title>{product.name}</Card.Title>
-                      <Card.Text>
+                    <div className="card-body">
+                      <div className="card-title">{product.name}</div>
+                      <div className="card-text">
                         Some quick example text to build on the card title and
                         make up the bulk of the card's content.
-                      </Card.Text>
-                      <Button variant="primary">View</Button>
-                    </Card.Body>
-                  </Card>
+                      </div>
+                      <button className="btn btn-primary">View</button>
+                    </div>
+                  </div>
                 </Link>
-              </Col>
+              </div>
             ))}
-          </Row>
-        </Container>
+          </div>
+        </div>
       ) : (
         <div
           style={{

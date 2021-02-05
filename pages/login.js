@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
-import { Form, Button, Container } from "react-bootstrap";
 import { loggedIn } from "../client/hocs/redirect";
 
 const Login = () => {
@@ -54,29 +53,37 @@ const Login = () => {
           alignItems: "center",
         }}
       >
-        <Container>
-          <Form.Group>
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
+        <div className="container">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">
+              Email address
+            </label>
+            <input
               onChange={emailHandler}
               type="email"
-              placeholder="Enter email"
+              class="form-control"
+              id="loginEmail"
+              aria-describedby="emailHelp"
             />
-            <Form.Text className="text-muted">
+            <div id="emailHelp" class="form-text">
               We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+            </div>
+          </div>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">
+              Password
+            </label>
+            <input
               onChange={passwordHandler}
               onKeyUp={enterHandler}
               type="password"
-              placeholder="Password"
+              class="form-control"
+              id="loginPassword"
+              aria-describedby="emailHelp"
             />
-          </Form.Group>
-          <Button onClick={loginHandler} variant="dark">
+          </div>
+          <button onClick={loginHandler} className="btn btn-dark">
             {loading ? (
               <div class="spinner-border text-light" role="status">
                 <span class="visually-hidden"> </span>
@@ -84,7 +91,7 @@ const Login = () => {
             ) : (
               <span>SignIn</span>
             )}
-          </Button>
+          </button>
           <div className="pointer py-5">
             <span>Don't have an account?</span>
             <Link href="/comming">
@@ -94,7 +101,7 @@ const Login = () => {
               </u>
             </Link>
           </div>
-        </Container>
+        </div>
       </div>
     </div>
   );

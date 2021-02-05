@@ -2,13 +2,17 @@
   font-size: 2rem;
   padding: 0 15px 0 0;
   height: 100%;
+  margin: 0;
 }
 
 .searchBoxContainer {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
 
   .searchBox {
+    width: 60vw;
+
     &:before {
       content: "";
       box-sizing: border-box;
@@ -19,7 +23,7 @@
     input {
       border: none;
       outline: none;
-      width: 70vw;
+      width: 80%;
     }
   }
 }
@@ -39,9 +43,7 @@
 
   .searchBoxContainer {
     .searchBox {
-      input {
-        width: 60vw;
-      }
+      width: 60vw;
     }
   }
 }
@@ -52,9 +54,7 @@
 
   .searchBoxContainer {
     .searchBox {
-      input {
-        width: 40vw;
-      }
+      width: 40vw;
     }
   }
 }
@@ -62,12 +62,32 @@
 @media screen and (max-width: 720px) {
   .customNavBrand {
     font-size: 1.3rem;
+    padding: 0;
   }
 
   .searchBoxContainer {
+    padding: 0 0 0 15px;
+    .searchBox {
+      width: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .searchBoxContainer {
     .searchBox {
       input {
-        width: 20vw;
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 310px) {
+  .searchBoxContainer {
+    .searchBox {
+      input {
+        width: 50px;
       }
     }
   }
