@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const fs = require("fs");
 
 module.exports = (sequelize, DataTypes) => {
   const uppercaseFirst = (str) => `${str[0].toUpperCase()}${str.substr(1)}`;
@@ -44,6 +45,15 @@ module.exports = (sequelize, DataTypes) => {
       delete instance.product;
       delete instance.dataValues.product;
     }
+  });
+
+  Image.addHook("beforeDestroy", (image) => {
+    fs.unlink(`./public/products_page${image.url}`, (err) => {
+      if (err) {
+        console.log(`Failed to delete image ${image.url}`, err);
+        return;
+      }
+    });
   });
 
   return Image;

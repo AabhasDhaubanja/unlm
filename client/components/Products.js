@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const Products = ({ title, products }) => {
-  console.log(products);
   return (
     <>
       {title ? (

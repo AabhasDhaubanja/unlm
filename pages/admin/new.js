@@ -1,12 +1,16 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/client";
-import { ADD_PRODUCT } from "../../lib/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { initializeApollo } from "../../lib/apolloClient";
+import { GET_CATEGORIES, ADD_PRODUCT } from "../../lib/queries";
 import { nonAdmin } from "../../client/hocs/redirect";
 
 const New = () => {
   const [addProduct] = useMutation(ADD_PRODUCT);
 
-  const [loading, setLoading] = useState(false);
+  const { loading, error, data } = useQuery(GET_CATEGORIES);
+
+  // For the loading animation on create
+  const [createLoading, setLoading] = useState(false);
 
   const [state, setState] = useState({
     name: "Default Product",
@@ -40,10 +44,18 @@ const New = () => {
       },
     });
 
-    console.log(product);
-
     setLoading(false);
+
+    window.location.href = "/discover/1";
   };
+
+  // This is for the GraphQl Query GET_CATEGORIES
+  if (loading) return "Loading...";
+  if (error) return `Error! ${error.message}`;
+
+  // Removing the root category
+  const { categories } = data;
+  const cats = categories.filter((cat) => cat.isRoot !== true);
 
   return (
     <div className="container py-5 mt-5">
@@ -81,15 +93,18 @@ const New = () => {
         <label htmlFor="newProductCategory" className="form-label">
           Category
         </label>
-        <input
+        <select
           onChange={inputHandler}
-          placeholder="Enter Category"
           name="categoryId"
-          type="number"
-          className="form-control"
-          id="newProductCategory"
-          aria-describedby="productCategory"
-        />
+          className="form-select"
+          aria-label="Default select example"
+        >
+          {cats.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div className="mb-3">
@@ -108,7 +123,7 @@ const New = () => {
       </div>
 
       <button className="btn btn-dark" type="submit" onClick={createHandler}>
-        {loading ? (
+        {createLoading ? (
           <div className="spinner-border text-light" role="status">
             <span className="visually-hidden"></span>
           </div>
@@ -119,5 +134,19 @@ const New = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_CATEGORIES,
+  });
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+  };
+}
 
 export default nonAdmin(New);
